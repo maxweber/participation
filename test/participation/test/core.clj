@@ -6,19 +6,19 @@
 
 (def event-name "event_name")
 
-(defparticipation event-handling [event]
+(defparticipation "event-handling"
   (fn [event] (:name event)))
 
-(defparticipant participant1 event-handling event-name
+(def participation-name "participation.test.core/event-handling")
+
+(defparticipant "participant1" event-handling event-name
   (fn [aggregate event] (assoc aggregate :participate1 (:name event))))
 
-(defparticipant participant2 event-handling event-name
+(defparticipant "participant2" participation-name event-name
   (fn [aggregate event] (assoc aggregate :participate2 (:name event))))
 
 (defn participant3 [aggregate event]
   (assoc aggregate :participate3 (:name event)))
-
-(def participation-name "participation.test.core/event-handling")
 
 (register-fn participation-name
              event-name participant3)
