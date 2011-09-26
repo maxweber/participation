@@ -80,3 +80,9 @@
         participation-name
         fn-symbol
         topic))))
+
+(defn defparticipant-part [participant-name prefix participation-name topic parameters body]
+  (let [fn-part (list* 'fn parameters body)
+        participant-name (str prefix (name participant-name))]
+    (list 'participation.core/defparticipant
+          participant-name participation-name topic fn-part)))
